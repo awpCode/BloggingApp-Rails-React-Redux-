@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   resources :categories, except: [:new, :edit]
   post "/login", to: "users#login"
   get "/auto_login", to: "users#auto_login"
+  get 'users/:id/toggle_admin', to: 'users#toggle_admin'
 end
