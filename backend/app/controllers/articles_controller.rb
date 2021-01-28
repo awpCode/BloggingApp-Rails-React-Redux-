@@ -1,9 +1,8 @@
 class ArticlesController < ApplicationController
 
-    before_action :set_article, only: [:show,:edit,:update,:destroy]
-
-    #before_action :require_user,except: [:show,:index]
-    #before_action :require_same_user, only: [:edit, :update, :destroy]
+    before_action :authorized, only: [:create, :update, :destroy]
+    before_action :set_article, only: [:show, :update, :destroy]
+    before_action :require_same_user, only: [:update, :destroy]
     
     def show
         render json: @article, status: 200
@@ -15,11 +14,7 @@ class ArticlesController < ApplicationController
 
     def create
       @article = Article.new(article_params)
-
-      #current_user request se lena hai 
-      #article.user = current_user
-      @article.user = User.first
-
+      @article.user = @USER
       if @article.save
         render json: @article, status: 200
       else
@@ -49,10 +44,10 @@ class ArticlesController < ApplicationController
       params.permit(:title,:description, category_ids: [])
     end
 
-    #def require_same_user
-     # if current_user != @article.user && !current_user.admin?
-      #  flash[:alert]="You can only edit or delete your own articles"
-       # redirect_to @article
-      #end
-    #end
+    def require_same_user
+      if @USER != @article.user && !@USER.admin?
+        render json: {error: "You can only edit or delete your own articles"}, status: 400
+      end
+    end
+
 end
