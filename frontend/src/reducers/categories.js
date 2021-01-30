@@ -1,4 +1,4 @@
-const initialState = [];
+const initialState = {};
 const categoryReducer = (state = initialState, action) => {
     switch(action.type){
         case "categories/fetch":

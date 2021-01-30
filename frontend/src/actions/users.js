@@ -22,5 +22,10 @@ export const createUserMiddleWare = obj => async (dispatch, getState) => {
 };
 export const fetchUsersMiddleWare = async (dispatch, getState) => {
     let res = await axios.get('http://localhost:3001/users');
-    dispatch(fetchUsers(res.data));
+    var arr = res.data;
+    var obj = {};
+    for (var i = 0; i < arr.length; i++) {
+        obj[arr[i].id] = arr[i];
+      }
+    dispatch(fetchUsers(obj));
 };
