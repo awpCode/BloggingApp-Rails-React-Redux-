@@ -17,12 +17,11 @@ const Login = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-
         dispatch(createUserMiddleWare(state))
         .then(res => {
             localStorage.setItem('token', res.token);
            // dispatch(fetchUsers());
-            dispatch(loginUser(res.user.id));
+            dispatch(loginUser(res.user));
         })
         .catch(err => {
             setErrors(err);

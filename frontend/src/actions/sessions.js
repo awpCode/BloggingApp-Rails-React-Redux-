@@ -1,8 +1,8 @@
 import axios from 'axios';
-export const loginUser = (id) => {
+export const loginUser = (obj) => {
     return {
         type: 'sessions/login',
-        payload: id
+        payload: obj
     };
 
 };
@@ -41,6 +41,6 @@ export const autoLoginMiddleWare = async (dispatch, getState) => {
 
         }
         if(res)
-           dispatch(loginUser(res.data.id));
+           dispatch(loginUser(res.data));
     }
 };

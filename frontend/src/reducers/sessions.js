@@ -1,19 +1,19 @@
 const initialState = {
     isLogged: false,
-    loggedUserId: null
+    loggedUser: {}
 }
 const sessionReducer = (state = initialState, action) => {
     switch(action.type){
         case "sessions/login":
             return {
                 isLogged: true,
-                loggedUserId: action.payload
+                loggedUser: action.payload
             };
         case "sessions/logout":
             return {
                 ...state,
                 isLogged: false,
-                loggedUserId: null
+                loggedUser: {}
             };
         default:
             return state;

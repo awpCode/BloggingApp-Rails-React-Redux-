@@ -19,7 +19,7 @@ const Login = () => {
         dispatch(loginMiddleWare(state))
         .then(res => {
             localStorage.setItem('token', res.token);
-            dispatch(loginUser(res.user.id));
+            dispatch(loginUser(res.user));
         })
         .catch(err => {
             setErrors([err]);
