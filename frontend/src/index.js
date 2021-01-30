@@ -13,11 +13,16 @@ import 'bootstrap/dist/js/bootstrap.js';
 import $ from 'jquery';
 import Popper from 'popper.js';
 import * as session from './actions/sessions';
-
+import * as users from './actions/users';
+import * as articles from './actions/articles';
+import * as categories from './actions/categories';
 const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware));
 const store = createStore(rootReducer, composedEnhancer);
 
 store.dispatch(session.autoLoginMiddleWare);
+store.dispatch(users.fetchUsersMiddleWare);
+store.dispatch(articles.fetchArticlesMiddleWare);
+store.dispatch(categories.fetchCategoriesMiddleWare);
 
 ReactDOM.render(
   <React.StrictMode>
