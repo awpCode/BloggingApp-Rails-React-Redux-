@@ -16,3 +16,9 @@ export const fetchArticlesMiddleWare = async (dispatch, getState) => {
       }
     dispatch(fetchArticles(obj));
 };
+
+export const deleteArticleMiddleWare = (id) => async (dispatch, getState) => {
+    console.log(id);
+    let res = await axios.delete(`http://localhost:3001/articles/${id}`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}});
+    dispatch(fetchArticlesMiddleWare);
+};
