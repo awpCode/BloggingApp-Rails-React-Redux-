@@ -20,8 +20,8 @@ const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware));
 const store = createStore(rootReducer, composedEnhancer);
 
 store.dispatch(session.autoLoginMiddleWare);
-store.dispatch(users.fetchUsersMiddleWare);
 store.dispatch(articles.fetchArticlesMiddleWare);
+store.dispatch(users.fetchUsersMiddleWare);
 store.dispatch(categories.fetchCategoriesMiddleWare);
 
 ReactDOM.render(

@@ -7,6 +7,7 @@ import Signup from './components/Signup';
 import Users from './components/Users';
 import Articles from './components/Articles';
 import EditArticle from './components/EditArticle';
+import NewArticle from './components/NewArticle';
 const App = () => {
   return (
     <React.Fragment>
@@ -20,6 +21,7 @@ const App = () => {
           <Route exact path = '/users' component = {Users} />
           <Route exact path = '/articles' component = {Articles} />
           <Route exact path = '/articles/:id/edit' component = {EditArticle} />
+          <Route exact path = '/articles/new' component = {NewArticle} />
         </Switch>
       </Router>
     </React.Fragment>

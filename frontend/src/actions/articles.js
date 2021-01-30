@@ -18,7 +18,34 @@ export const fetchArticlesMiddleWare = async (dispatch, getState) => {
 };
 
 export const deleteArticleMiddleWare = (id) => async (dispatch, getState) => {
-    console.log(id);
     let res = await axios.delete(`http://localhost:3001/articles/${id}`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}});
     dispatch(fetchArticlesMiddleWare);
+};
+
+export const createArticleMiddleWare = (obj) => async (dispatch, getState) => {
+    let res = null;
+    return new Promise(async(resolve,reject) => {
+        try{
+            res = await axios.post('http://localhost:3001/articles',{title: obj.title, description: obj.description},{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}});
+        }
+        catch(err){
+            reject(err.response.data.error);
+        }
+        if(res)
+            resolve('Success');
+    });
+};
+
+export const updateArticleMiddleWare = (obj, id) => async (dispatch, getState) => {
+    let res = null;
+    return new Promise(async(resolve,reject) => {
+        try{
+            res = await axios.patch(`http://localhost:3001/articles/${id}`,{title: obj.title, description: obj.description},{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}});
+        }
+        catch(err){
+            reject(err.response.data.error);
+        }
+        if(res)
+            resolve('Success');
+    });
 };

@@ -26,6 +26,7 @@ const ArticleRow = ({article}) => {
                     {loggedUserId === article.user_id && <button onClick = {() => dispatch(deleteArticleMiddleWare(article.id))} className = "float-right btn btn-dark m-1">Delete</button>}
                     {loggedUserId === article.user_id && <Link to = {{pathname: `/articles/${article.id}/edit`}} className = "float-right btn btn-dark m-1">Edit</Link>}
                     
+                    
                 </div>
             </div>
         </div>

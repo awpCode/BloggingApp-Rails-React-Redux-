@@ -1,16 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import {Redirect, useParams} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
-import {updateArticleMiddleWare, fetchArticlesMiddleWare} from '../actions/articles';
-const EditArticle = () => {
+import {useDispatch} from 'react-redux';
+import {createArticleMiddleWare, fetchArticlesMiddleWare} from '../actions/articles';
+const NewArticle = () => {
     const dispatch = useDispatch();
-    const {id} = useParams();
-    const article = useSelector(state => state.articles[id]);
-    const [state, setState] = useState({
-        title: article.title,
-        description:article.description,
+    const [state,setState] = useState({
+        title: "",
+        description: "",
+        done: false,
         errors: [],
-        done: false
     });
     const handleChange = (e) => {
         setState({...state, [e.target.name]: e.target.value});
@@ -18,7 +16,8 @@ const EditArticle = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        dispatch(updateArticleMiddleWare(state, id))
+        
+        dispatch(createArticleMiddleWare(state))
         .then(res => {
             dispatch(fetchArticlesMiddleWare);
             setState({...state, errors: [], done: true});
@@ -56,7 +55,7 @@ const EditArticle = () => {
     }
     return (
         <React.Fragment>
-            <h1>Edit Article</h1>
+            <h1>New Article</h1>
             {printErrors()}
             <form onSubmit = {handleSubmit}>
                 <label>Title:</label>
@@ -69,7 +68,6 @@ const EditArticle = () => {
             </form>
         </React.Fragment>
     );
-    return (<h1>A</h1>);
 }
  
-export default EditArticle;
+export default NewArticle;
