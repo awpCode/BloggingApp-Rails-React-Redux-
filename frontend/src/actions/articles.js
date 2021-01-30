@@ -9,5 +9,10 @@ export const fetchArticles = (articles) => {
 
 export const fetchArticlesMiddleWare = async (dispatch, getState) => {
     let res = await axios.get('http://localhost:3001/articles');
-    dispatch(fetchArticles(res.data));
+    var arr = res.data;
+    var obj = {};
+    for (var i = 0; i < arr.length; i++) {
+        obj[arr[i].id] = arr[i];
+      }
+    dispatch(fetchArticles(obj));
 };

@@ -1,4 +1,4 @@
-const initialState = [];
+const initialState = {};
 const articleReducer = (state = initialState, action) => {
     switch(action.type){
         case "articles/fetch":

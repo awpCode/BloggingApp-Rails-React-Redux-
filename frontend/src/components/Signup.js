@@ -4,7 +4,8 @@ import * as sessionSelector from '../selectors/sessions';
 import {Redirect} from 'react-router-dom';
 import {createUserMiddleWare} from '../actions/users';
 import {loginUser} from '../actions/sessions';
-const Login = () => {
+import {fetchUsersMiddleWare} from '../actions/users';
+const SignUp = () => {
 
     const dispatch = useDispatch();
     const isLogged = useSelector(sessionSelector.isLogged);
@@ -20,7 +21,7 @@ const Login = () => {
         dispatch(createUserMiddleWare(state))
         .then(res => {
             localStorage.setItem('token', res.token);
-           // dispatch(fetchUsers());
+            dispatch(fetchUsersMiddleWare);
             dispatch(loginUser(res.user));
         })
         .catch(err => {
@@ -35,8 +36,6 @@ const Login = () => {
         });
     };
     const printErrors = () => {
-        
-        console.log(errors);
         if(errors.length === 0)
             return '';  
         else{
@@ -77,4 +76,4 @@ const Login = () => {
     );
 }
  
-export default Login;
+export default SignUp;
